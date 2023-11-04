@@ -1,0 +1,228 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(45deg, rgba(34, 193, 195, 0.8), rgba(253, 187, 45, 0.8));
+}
+
+.sidebar {
+    background: rgba(255, 255, 255, 0.5);
+    padding: 20px;
+    min-width: 200px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    height: 609px
+}
+
+.sidebar h2 {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar li {
+    margin-bottom: 10px;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.sidebar a:hover {
+    text-decoration: underline;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 20px;
+    color: #333;
+    overflow-y: auto;
+}
+
+.box {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+/* DIVIDER */
+.divider {
+    width: 100%;
+    height: 1px;
+    background-color: gray;
+    margin-bottom: 10px;
+}
+
+.card {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 10px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 300px;
+    height: 320px;
+    overflow-y: auto;
+}
+
+.card-one {
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 200px;
+    height: 300px;
+    overflow: hidden;
+}
+
+.card-img {
+    width: 200px;
+    height: 320px;
+}
+
+.title-page {
+    margin-left: 15px;
+    font-weight: bold;
+    color: white;
+}
+
+.card-link {
+    text-decoration: none;
+    color: black;
+}
+
+.cover-wrapper {
+    display: flex;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    align-items: center;
+}
+
+/* Add hover effect to the card */
+.card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Add hover effect to the Open PDF link */
+.card a:hover {
+    text-decoration: underline;
+}
+
+.review-title {
+    margin-top: 50px;
+}
+
+/* STARTS */
+.rating-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.rating-wrapper p {
+    top: -20px;
+    position: relative;
+}
+
+/* REVIEW FORM */
+.add-review-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-review-form h3 {
+    font-weight: bold;
+    color: white;
+}
+
+.star-rating {
+    display: flex;
+    flex-direction: row;
+    width: 120px;
+    transform: rotateY(180deg);
+}
+
+.star-rating input {
+    display: none;
+}
+
+.star-rating label {
+    display: block;
+    cursor: pointer;
+    width: 25px;
+}
+
+.star-rating label:before {
+    content: '\f005';
+    font-family: fontAwesome;
+    position: relative;
+    display: block;
+    font-size: 20px;
+    color: white;
+}
+
+.star-rating label:after {
+    content: '\f005';
+    font-family: fontAwesome;
+    position: relative;
+    display: block;
+    font-size: 20px;
+    color: yellow;
+    top: -20px;
+    opacity: 0;
+    transition: .5s;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, .5);
+}
+
+.star-rating label:hover:after,
+.star-rating label:hover ~ label::after,
+.star-rating input:checked ~ label:after {
+    opacity: 1;
+}
+
+.add-review-form textarea {
+    width: 500px;
+    height: 100px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: none;
+    font-family: Arial, sans-serif;
+    margin-bottom: 20px;
+}
+
+.add-review-form button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 200px;
+    margin-left: 150px;
+}
+
+.add-review-form button:hover {
+    background-color: #0056b3;
+}
+
+/* COMMENTS */
+.comments {
+    height: 200px;
+    overflow: auto;
+}
+
+.comments::-webkit-scrollbar {
+    display: none;
+}
