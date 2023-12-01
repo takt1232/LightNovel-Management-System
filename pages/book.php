@@ -52,8 +52,8 @@ if ((isset($_GET['bookId']))) {
     <div class="content">
         <div class="box">
             <div class="card-one">
-                <?php if (!empty($book['book_cover']) && file_exists($book['book_cover'])) : ?>
-                    <img class="card-img" src="<?php echo $book['book_cover']; ?>" alt="Book Cover">
+                <?php if (!empty($book[0]['book_cover']) && file_exists($book[0]['book_cover'])) : ?>
+                    <img class="card-img" src="<?php echo $book[0]['book_cover']; ?>" alt="Book Cover">
                 <?php else : ?>
                     <img class="card-img" src="../images/no-cover-art.jpg" alt="Placeholder Image">
                 <?php endif; ?>

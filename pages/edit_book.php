@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             echo '<script>';
             echo 'if(confirm("Book Edited successfully. Press OK to continue.")){';
-            echo '  window.location.href = "window.history.back().php";';
+            echo '  window.location.href = "window.history.back()";';
             echo '}';
             echo '</script>';
         } else {

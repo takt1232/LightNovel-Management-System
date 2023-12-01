@@ -27,8 +27,8 @@ $publishedBooks = executeQuery($sql4, $params4);
     <div class="box">
         <label for="statusFilter">Filter by Status:</label>
         <select id="statusFilter" onchange="filterBooks()">
-            <option value="Published">Published</option>
             <option value="Submitted">Submitted</option>
+            <option value="Published">Published</option>
             <option value="Approved">Approved</option>
             <option value="Complete Approval">Complete Approval</option>
         </select>
@@ -39,6 +39,36 @@ $publishedBooks = executeQuery($sql4, $params4);
                 <!-- Table content will be dynamically generated here -->
             </table>
         </div>
+    </div>
+</div>
+
+<!-- Publish Modal -->
+<div id="approveModal" class="modal">
+    <div class="modal-content">
+        <form action="admin_approved_book.php" method="POST">
+            <span class="close" onclick="closeApprovedModal()">&times;</span>
+            <h2>Approved Book</h2>
+            <div class="divider"></div>
+            <p>Are you sure you want to approved this book?</p>
+            <input type="number" name="approve-book-id" id="approve-book-id" hidden>
+            <button type="submit" class="modal-btn">Approved</button>
+        </form>
+    </div>
+</div>
+
+<!-- Publish Modal -->
+<div id="publishModal" class="modal">
+    <div class="modal-content">
+        <form action="admin_publish_book.php" method="POST">
+            <span class="close" onclick="closePublishModal()">&times;</span>
+            <h2>Publish Book</h2>
+            <div class="divider"></div>
+            <p>Are you sure you want to publish this book?</p>
+            <input type="hidden" name="admin-approval" id="admin-approval" >
+            <input type="hidden" name="writer-approval" id="writer-approval" >
+            <input type="number" name="publish-book-id" id="publish-book-id" hidden>
+            <button type="submit" class="modal-btn">Approved</button>
+        </form>
     </div>
 </div>
 
@@ -71,10 +101,16 @@ $publishedBooks = executeQuery($sql4, $params4);
                         </td>
                         <td>
                             <a href="#" class="action-icon">
-                                <i class="fas fa-edit" onclick="openEditModal(${JSON.stringify(book)})"></i>
+                                <i class="fas fa-edit" onclick="openApproveModal({
+                                    book_id: ${book.book_id},
+                                })"></i>
                             </a>
                             <a href="#" class="action-icon">
-                                <i class="fas fa-upload" onclick="openPublishModal(${JSON.stringify(book)})"></i>
+                                <i class="fas fa-upload" onclick="openPublishModal({
+                                    book_id: ${book.book_id},
+                                    status: '${book.status}',
+                                    approval_token: '${book.approval_token}',
+                                })"></i>
                             </a>
                         </td>
                     </tr>
@@ -111,25 +147,18 @@ $publishedBooks = executeQuery($sql4, $params4);
     }
 
     // Initially, load the table with published books
-    generateTable(<?php echo json_encode($publishedBooks); ?>);
+    generateTable(<?php echo json_encode($submittedBooks); ?>);
 </script>
 
 <script>
-    function openEditModal(bookData) {
-        document.getElementById('editModal').style.display = 'block';
+    function openApproveModal(bookData) {
+        document.getElementById('approveModal').style.display = 'block';
 
-        document.getElementById('edit-book-title').value = bookData.book_title;
-        document.getElementById('edit-synopsis').value = bookData.synopsis;
-        document.getElementById('edit-author').value = bookData.username;
-        document.getElementById('edit-book-id').value = bookData.book_id;
-        document.getElementById('edit-user-id').value = bookData.author_id;
-        document.getElementById('edit-file-path').value = bookData.file_path;
-        document.getElementById('edit-status').value = bookData.status;
-        document.getElementById('edit-approval').value = bookData.approval_token;
+        document.getElementById('approve-book-id').value = bookData.book_id;
     }
 
-    function closeEditModal() {
-        document.getElementById('editModal').style.display = 'none';
+    function closeApproveModal() {
+        document.getElementById('approveModal').style.display = 'none';
     }
 
     function openPublishModal(bookData) {

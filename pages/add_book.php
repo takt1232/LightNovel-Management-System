@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $bookTitle = $_POST['book-title'];
         $synopsis = $_POST['synopsis'];
         $userId = $_POST['user-id'];
-        $approvalToken = 'Not Approved by writer';
+        $approvalToken = 'Approved by writer';
         $status = 'Submitted';
 
         // Check if a file was uploaded

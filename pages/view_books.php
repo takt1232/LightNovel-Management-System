@@ -13,7 +13,7 @@ $sql1 = "SELECT *, users.username FROM books INNER JOIN users ON books.author_id
 $params1 = [$user_id];
 $approvedBooks = executeQuery($sql1, $params1);
 
-$sql2 = "SELECT *, users.username FROM books INNER JOIN users ON books.author_id = users.user_id WHERE author_id = ? AND status = 'Approved' AND approval_token = 'Approved by writer' ";
+$sql2 = "SELECT *, users.username FROM books INNER JOIN users ON books.author_id = users.user_id WHERE author_id = ? AND (status = 'Approved' OR status = 'Published') AND approval_token = 'Approved by writer' ";
 $params2 = [$user_id];
 $completeApprovalBooks = executeQuery($sql2, $params2);
 
@@ -136,11 +136,26 @@ $publishedBooks = executeQuery($sql3, $params3);
                         </td>
                         <td>
                             <a href="#" class="action-icon">
-                                <i class="fas fa-edit" onclick="openEditModal(${JSON.stringify(book)})"></i>
+                                <i class="fas fa-edit" onclick="openEditModal({
+                                    book_id: ${book.book_id},
+                                    book_title: '${book.book_title}',
+                                    author_id: ${book.author_id},
+                                    synopsis: '${book.synopsis}',
+                                    status: '${book.status}',
+                                    approval_token: '${book.approval_token}',
+                                    file_path: '${book.file_path}'
+                                })"></i>
                             </a>
-                            <a href="#" class="action-icon">
-                                <i class="fas fa-upload" onclick="openPublishModal(${JSON.stringify(book)})"></i>
-                            </a>
+                            ${
+                                book['status'] !== 'Published' ?
+                                `<a href="#" class="action-icon">
+                                    <i class="fas fa-upload" onclick="openPublishModal({
+                                        book_id: ${book.book_id},
+                                        status: '${book.status}',
+                                        approval_token: '${book.approval_token}'
+                                    })"></i>
+                                </a>` : ''
+                            }
                         </td>
                     </tr>
                 `;
